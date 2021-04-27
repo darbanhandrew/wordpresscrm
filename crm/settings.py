@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_actions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -127,5 +128,6 @@ ORDER_STATUS = [
     ('cancelled', 'Cancelled'),
     ('refunded', 'Refunded'),
     ('failed', 'Failed'),
-    ('trash', 'Trash')
+    ('trash', 'Trash'),
+    ('shipping-progress', 'Shipping')
 ]
