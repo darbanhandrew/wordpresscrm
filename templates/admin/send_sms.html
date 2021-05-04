@@ -1,10 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "admin/base_site.html" %}
 
-</body>
-</html>
+{% block content %}
+<form action="" method="post">
+  {% csrf_token %}
+<p>
+متن پیام ارسالی برای کاربران انتخاب شده را وارد کنید</p>
+  {% for customer in customers %}
+    <span>
+      {{ customer }}
+    </span>
+    <input type="hidden" name="_selected_action" value="{{ customer.pk }}" />
+  {% endfor %}
+<br/>
+<button value="!!first_name!!" type="button" onclick="InsertFunction(this.value)" class="insert-text">نام</button>
+<button value="!!last_name!!" type="button" onclick="InsertFunction(this.value)" class="insert-text">نام خانوداگی</button>
+<button value="!!address_1!!" type="button" onclick="InsertFunction(this.value)" class="insert-text">آدرس</button>
+<button value="!!city!!" type="button" onclick="InsertFunction(this.value)" class="insert-text">شهر</button>
+<button value="!!state!!" type="button" onclick="InsertFunction(this.value)" class="insert-text">استان</button>
+<button value="!!phone!!" type="button" onclick="InsertFunction(this.value)" class="insert-text">شماره تلفن</button>
+<button value="!!postcode!!" type="button" onclick="InsertFunction(this.value)" class="insert-text">کد پستی</button>
+<br/>
+
+    <textarea dir="rtl" name="sms_text" rows="4" cols="50" placeholder="Enter sms text">
+    </textarea>
+    <br/>
+  <input type="hidden" name="action" value="send_sms" />
+  <input type="submit" name="apply" value="Update status"/>
+</form>
+    <script>
+        function InsertFunction(value) {
+            current_text = document.getElementsByTagName("textarea")[0].value;
+            current_text = current_text + value;
+            document.getElementsByTagName("textarea")[0].value =  current_text;
+    }
+
+
+    </script>
+{% endblock %}
