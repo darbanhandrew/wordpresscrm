@@ -19,6 +19,12 @@
 <button value="!!state!!" type="button" onclick="InsertFunction(this.value)" class="insert-text">استان</button>
 <button value="!!phone!!" type="button" onclick="InsertFunction(this.value)" class="insert-text">شماره تلفن</button>
 <button value="!!postcode!!" type="button" onclick="InsertFunction(this.value)" class="insert-text">کد پستی</button>
+<select name="coupons" id="coupons" onchange="InsertFunction(this.value)">
+  <option value="">انتخاب کد تخفیف</option>
+      {% for coupon in coupons %}
+          <option value="!!coupon_{{ coupon.id }}!!"> {{ coupon.name}} - {{coupon.discount}}</option>
+      {% endfor %}
+</select>
 <br/>
 
     <textarea dir="rtl" name="sms_text" rows="4" cols="50" placeholder="Enter sms text">

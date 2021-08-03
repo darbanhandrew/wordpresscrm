@@ -18,9 +18,19 @@ class Customer(models.Model):
     billing_email = models.CharField(max_length=100, blank=True, null=True)
     billing_phone = models.CharField(max_length=100, blank=True, null=True)
     customer_ip_address = models.GenericIPAddressField(blank=True, null=True)
+    number_of_successful_orders = models.IntegerField(default=0)
+    number_of_failed_orders = models.IntegerField(default=0)
+    total_bought = models.IntegerField(default=0)
+    mean_month_bought = models.IntegerField(default=0)
 
     def __str__(self):
         return self.billing_first_name + ' ' + self.billing_last_name + ' ' + str(self.id)
+
+    # def calculate_number_of_successful_orders(self):
+    #     return len(Order.objects.filter(customer=self, status__in=['processing', 'completed', 'shipping-progress']))
+    #
+    # # calculate_number_of_orders.admin_order_field = calculate_number_of_orders
+    # number_of_successful_orders = property(calculate_number_of_successful_orders)
 
 
 class Order(models.Model):
@@ -35,4 +45,13 @@ class Order(models.Model):
     order_woo_number = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
-        return 'Order' + ' '+str(self.woo_id)
+        return 'Order' + ' ' + str(self.woo_id)
+
+
+class Coupon(models.Model):
+    name = models.CharField(max_length=100)
+    TYPE = [('percent', 'percent'), ('fixed_cart', 'fixed_cart')]
+    category = models.CharField(max_length=100, choices=TYPE)
+    discount = models.IntegerField()
+    max_discount = models.IntegerField()
+    number_of_usage = models.IntegerField()
