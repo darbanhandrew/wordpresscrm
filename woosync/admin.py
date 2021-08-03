@@ -65,7 +65,7 @@ class CustomerAdmin(ActionsModelAdmin):
             return HttpResponseRedirect(request.get_full_path())
         return render(request,
                       'admin/send_sms.html',
-                      context={'customers': queryset, 'coupons': coupons})
+                      context={'customers': queryset, 'coupons':coupons})
 
     send_sms.short_description = "Send sms"
     actions_list = ('calculate_loyalty',)
